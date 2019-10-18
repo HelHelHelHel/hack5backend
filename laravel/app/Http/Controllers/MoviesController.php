@@ -19,9 +19,13 @@ class MoviesController extends Controller
         $limit = $request->input('limit', 10);
         $page = max(1, $request->input('page', 1));
 
+        $movies_in_theaters = DB::table('screenings ')
+            ->pluck('movie_id');
+
         $query = DB::table('movies');
 
-        $query->orderby('name', 'asc')
+        $query->whereIn('id', $movies_in_theaters)
+            ->orderby('name', 'asc')
             ->limit($limit)
             ->offset(($page * $limit) - $limit);
 
