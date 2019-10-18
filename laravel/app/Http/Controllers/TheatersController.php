@@ -7,10 +7,25 @@ use DB;
 class TheatersController extends Controller
 {
     //
-    public function index() 
+    public function index(Request $request) 
     {
-        $theaters = DB::table('theaters')
-                        ->get();
-                    return $theaters;
+        $slug = $request->input('theater');
+
+        $query = DB::table('theaters');
+
+        if ($slug !== null) {
+            $query ->where('slug', $slug);
+            return (array)$query->first();
+        } else {
+            return $query->get();
+        }    
+
+        
     }
+
+    public function open () 
+    {
+        
+    }
+
 }
