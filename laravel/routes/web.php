@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::get('/api/theater', 'TheatersController@index');
 Route::get('/api/movies', 'MoviesController@index');
 Route::get('/api/programme', 'ProgrammeController@index');
+Route::get('/api/screenings/today', 'ProgrammeController@today');
